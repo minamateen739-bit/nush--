@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="ur" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nush (نوش) — Artisanal Karachi Bakery</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Linked External CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- FLOATING PILL NAVBAR -->
+    <div class="navbar-wrapper">
+        <nav class="navbar">
+            <a href="#" class="logo">
+                <div class="logo-icon"><i class="fa-solid fa-wheat-awn"></i></div>
+                <div class="logo-text">Nush <span>نوش</span></div>
+            </a>
+
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#menu" class="nav-link">Our Menu</a></li>
+                <li><a href="#about" class="nav-link">About Us</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <!-- Search Box in Navbar -->
+                <div class="nav-search-box">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" placeholder="Search item..." oninput="filterProductsNav(this.value)">
+                </div>
+
+                <!-- Login Button in Navbar -->
+                <button class="nav-login-btn" onclick="openLoginModal()">
+                    <i class="fa-solid fa-user"></i> Login
+                </button>
+
+                <!-- Cart Trigger -->
+                <button class="cart-trigger" onclick="toggleCart()">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span>Cart</span>
+                    <span class="cart-count-badge" id="cart-count">0</span>
+                </button>
+
+                <button class="mobile-toggle" onclick="toggleMobileMenu()">
+                    <i class="fa-solid fa-bars" id="menu-icon"></i>
+                </button>
+            </div>
+        </nav>
+    </div>
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="home">
+        <div class="hero-text-content">
+            <div class="hero-badge">
+                <i class="fa-solid fa-award"></i> 100% Khalis Desi Ghee & Freshly Baked
+            </div>
+            <h1 class="hero-title">Crafting Pure <span>Karachi</span> Bakery Heritage.</h1>
+            <p class="hero-desc">Experience the true taste of Karachi with fresh Chicken Patties, crispy Bakarkhani, almond-enriched Nankhatai, and soft Rusk baked fresh daily.</p>
+            <div class="hero-cta-btns">
+                <a href="#menu" class="btn-primary">Order Online <i class="fa-solid fa-arrow-right"></i></a>
+                <a href="#about" class="btn-secondary">Our Story</a>
+            </div>
+        </div>
+
+        <div class="hero-image-wrapper">
+            <img src="Soft Sugar Donuts.jpg" alt="Karachi Fresh Bakery Items" class="hero-img-card">
+            <div class="hero-floating-tag">
+                <div class="tag-icon"><i class="fa-solid fa-fire-burner"></i></div>
+                <div>
+                    <h4 style="color: var(--almond-deep); font-size: 0.95rem;">Fresh Hot Batches</h4>
+                    <p style="color: var(--text-muted); font-size: 0.8rem;">Delivered directly across Karachi</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MENU & ORDER SECTION -->
+    <section class="menu-section" id="menu">
+        <div class="section-header">
+            <div class="section-subtitle">Karachi Khas</div>
+            <h2 class="section-title">Famous Bakery Specials</h2>
+        </div>
+
+        <!-- CATEGORY CONTROLS -->
+        <div class="controls-container">
+            <div class="category-tabs">
+                <button class="tab-btn active" onclick="filterCategory('all', this)">All Items</button>
+                <button class="tab-btn" onclick="filterCategory('savory', this)">Savory & Patties</button>
+                <button class="tab-btn" onclick="filterCategory('sweet', this)">Sweets & Biscuits</button>
+                <button class="tab-btn" onclick="filterCategory('cakes', this)">Cakes & Pastries</button>
+            </div>
+        </div>
+
+        <!-- PRODUCT GRID -->
+        <div class="product-grid" id="product-grid">
+            
+            <!-- Item 1: Karachi Chicken Patties -->
+            <div class="product-card" data-category="savory">
+                <img src="Pakistani Chicken Patties Recipe.jpg" alt="Chicken Patties" class="product-img">
+                <div class="product-info">
+                    <h3>Karachi Flaky Chicken Patties</h3>
+                    <p>Crispy, layered puff pastry stuffed with seasoned chicken filling.</p>
+                    <div class="product-bottom">
+                        <span class="price">Rs. 120</span>
+                        <button class="add-btn" onclick="addToCart('Chicken Patties', 120)">Add to Bag</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 2: Beef Patties -->
+            <div class="product-card" data-category="savory">
+                <img src="Beef Patties.jpg" alt="Beef Patties" class="product-img">
+                <div class="product-info">
+                    <h3>Spicy Beef Patties</h3>
+                    <p>Traditional Karachi style golden puff pastry filled with spiced minced beef.</p>
+                    <div class="product-bottom">
+                        <span class="price">Rs. 140</span>
+                        <button class="add-btn" onclick="addToCart('Beef Patties', 140)">Add to Bag</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 3: Shahi Nankhatai -->
+            <div class="product-card" data-category="sweet">
+                <img src="Nankhatai.jpg" alt="Shahi Nankhatai" class="product-img">
+                <div class="product-info">
+                    <h3>Shahi Desi Ghee Nankhatai</h3>
+                    <p>Melt-in-your-mouth shortbread biscuits loaded with almonds and cardamom.</p>
+                    <div class="product-bottom">
+                        <span class="price">Rs. 450 <small>/ 250g</small></span>
+                        <button class="add-btn" onclick="addToCart('Shahi Nankhatai', 450)">Add to Bag</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 4: Crunchy Cake Rusk -->
+            <div class="product-card" data-category="sweet">
+                <img src="rusk.jpg" alt="Cake Rusk" class="product-img">
+                <div class="product-info">
+                    <h3>Crispy Double Baked Cake Rusk</h3>
+                    <p>The ultimate Karachi evening tea companion. Sweet and extra crunchy.</p>
+                    <div class="product-bottom">
+                        <span class="price">Rs. 380 <small>/ Box</small></span>
+                        <button class="add-btn" onclick="addToCart('Cake Rusk', 380)">Add to Bag</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 5: Crispy Bakarkhani -->
+            <div class="product-card" data-category="sweet">
+                <img src="Bakarkhani.jpg" alt="Bakarkhani" class="product-img">
+                <div class="product-info">
+                    <h3>Sweet Layered Bakarkhani</h3>
+                    <p>Classic puff pastry puff biscuits glazed with mild sweetness and sesame seeds.</p>
+                    <div class="product-bottom">
+                        <span class="price">Rs. 320 <small>/ Pack</small></span>
+                        <button class="add-btn" onclick="addToCart('Bakarkhani', 320)">Add to Bag</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 6: Chocolate Chip Cookie -->
+            <div class="product-card" data-category="sweet">
+                <img src="chocolate chip coockie.jpg" alt="Chocolate Chip Cookie" class="product-img">
+                <div class="product-info">
+                    <h3>Classic Chocolate Chip Cookie</h3>
+                    <p>Soft, chewy cookies loaded with rich chocolate chips.</p>
+                    <div class="product-bottom">
+                        <span class="price">Rs. 350</span>
+                        <button class="add-btn" onclick="addToCart('Chocolate Chip Cookie', 350)">Add to Bag</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 7: Black Forest Pastry -->
+            <div class="product-card" data-category="cakes">
+                <img src="Black Forest Pastry.jpg" alt="Black Forest Pastry" class="product-img">
+                <div class="product-info">
+                    <h3>Classic Black Forest Pastry</h3>
+                    <p>Rich chocolate sponge layered with fresh whip cream and cherry topping.</p>
+                    <div class="product-bottom">
+                        <span class="price">Rs. 220</span>
+                        <button class="add-btn" onclick="addToCart('Black Forest Pastry', 220)">Add to Bag</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 8: Plain Tea Cake -->
+            <div class="product-card" data-category="cakes">
+                <img src="Butter Tea Cake.jpg" alt="Butter Tea Cake" class="product-img">
+                <div class="product-info">
+                    <h3>Butter Tea Cake</h3>
+                    <p>Soft, airy, aromatic vanilla sponge cake baked fresh every morning.</p>
+                    <div class="product-bottom">
+                        <span class="price">Rs. 400</span>
+                        <button class="add-btn" onclick="addToCart('Butter Tea Cake', 400)">Add to Bag</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" style="max-width: 1100px; margin: 60px auto; padding: 0 20px;">
+        <div style="background: var(--almond-cream); border-radius: 30px; padding: 50px 30px; text-align: center; border: 1px solid var(--almond-light);">
+            <h2 class="brand-font" style="font-size: 2.2rem; color: var(--almond-deep); margin-bottom: 16px;">The Art of Nush (نوش) Karachi</h2>
+            <p style="max-width: 700px; margin: 0 auto; color: var(--text-muted); font-size: 1.05rem;">
+                Nush brings authentic Karachi bakery flavor straight to your table. Prepared daily with pure ingredients, premium nuts, and classic recipes.
+            </p>
+        </div>
+    </section>
+
+    <!-- CART SIDEBAR DRAWER -->
+    <div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
+    <div class="cart-drawer" id="cart-drawer">
+        <div class="cart-header">
+            <h3><i class="fa-solid fa-bag-shopping"></i> Your Bakery Bag</h3>
+            <button class="close-cart" onclick="toggleCart()"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+
+        <div class="cart-body" id="cart-body"></div>
+
+        <div class="cart-footer">
+            <div class="subtotal-row">
+                <span>Subtotal:</span>
+                <span id="cart-subtotal">Rs. 0</span>
+            </div>
+
+            <div class="customer-form">
+                <input type="text" id="cust-name" class="form-input" placeholder="Your Name *" required>
+                <input type="tel" id="cust-phone" class="form-input" placeholder="Mobile Number *" required>
+                <input type="text" id="cust-address" class="form-input" placeholder="Delivery Address & Area (Karachi) *" required>
+            </div>
+
+            <button class="whatsapp-order-btn" onclick="checkoutWhatsApp()">
+                <i class="fa-brands fa-whatsapp" style="font-size: 1.2rem;"></i> Confirm Order via WhatsApp
+            </button>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div class="toast" id="toast">
+        <i class="fa-solid fa-circle-check" style="color: #25D366;"></i>
+        <span id="toast-message">Item added to your bag!</span>
+    </div>
+
+    <!-- FOOTER WITH SOCIAL LINKS -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-col">
+                <h4 class="brand-font">Nush (نوش) Bakery</h4>
+                <p>Pure ingredients, traditional taste, and freshly baked goodness delivered right across Karachi.</p>
+                
+                <div class="footer-socials">
+                    <a href="https://facebook.com" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="https://instagram.com" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://tiktok.com" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+                    <a href="https://linkedin.com" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Working Hours</h4>
+                <p>Monday - Sunday</p>
+                <p><strong>8:00 AM - 11:00 PM</strong></p>
+            </div>
+            <div class="footer-col">
+                <h4>Order Helpline</h4>
+                <p><i class="fa-solid fa-phone"></i> +92 300 1234567</p>
+                <p><i class="fa-solid fa-location-dot"></i> PECHS Block 6, Karachi</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 Nush Artisanal Bakery Karachi. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- Linked External JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
