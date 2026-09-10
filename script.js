@@ -141,14 +141,14 @@ function showToast(message) {
 
 // Login Modal System
 function openLoginModal() {
-    const userPhone = prompt("برائے مہربانی اپنا موبائل نمبر درج کریں (Login کے لیے):");
+    const userPhone = prompt("Please enter your mobile number (for Login):");
     if (userPhone) {
-        showToast(`خوش آمدید! آپ کا اکاؤنٹ (${userPhone}) کامیابی سے لاگ ان ہو گیا ہے۔`);
+        showToast(`Welcome! Your account (${userPhone}) has been logged in successfully.`);
     }
 }
 
-// WhatsApp Checkout System
-function checkoutWhatsApp() {
+// UPDATED: Spring Boot Backend Integration + WhatsApp Checkout System
+async function checkoutWhatsApp() {
     if (cart.length === 0) {
         alert('Please add items to your bag before checking out.');
         return;
@@ -172,6 +172,37 @@ function checkoutWhatsApp() {
         itemsList += `• ${item.title} (x${item.quantity}) - Rs. ${itemTotal}\n`;
     });
 
+    // 1. Prepare JSON Payload for Java Spring Boot Backend
+    const backendData = {
+        customerName: name,
+        phone: phone,
+        address: address,
+        items: cart,
+        totalAmount: subtotal
+    };
+
+    // 2. Send Order Payload to Spring Boot API
+    try {
+        const response = await fetch('http://localhost:8080/api/order', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(backendData)
+        });
+
+        if (response.ok) {
+            const result = await response.json();
+            console.log("Backend Response:", result);
+            showToast("Order logged to Java Backend!");
+        } else {
+            console.warn("Backend response was not OK.");
+        }
+    } catch (error) {
+        console.error("Backend Error (Server running?):", error);
+    }
+
+    // 3. WhatsApp Redirect Action
     const whatsappNumber = "923001234567";
     const message = `*NEW ORDER - NUSH BAKERY KARACHI*\n\n` +
                     `*Customer Details:*\n` +
